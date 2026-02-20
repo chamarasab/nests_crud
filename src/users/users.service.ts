@@ -13,8 +13,8 @@ export class UsersService {
     return this.userModel.find().exec();
   }
 
-  //async createUser(user: User): Promise<User> {
-  //  const newUser = new this.userModel(user);
-  //  return newUser.save();
-  //}
+  async createUser(user: User): Promise<User> {
+    const newUser = new this.userModel(user);
+    return newUser.save();
+  }
 }
