@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from './schema/users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { UserDocument } from './schema/users.schema';
+import { User, UserDocument } from './schema/users.schema';
 
 @Injectable()
 export class UsersService {
@@ -16,5 +14,9 @@ export class UsersService {
   async createUser(user: User): Promise<User> {
     const newUser = new this.userModel(user);
     return newUser.save();
+  }
+
+  async updateUser(id: string, user: Partial<User>): Promise<User> {
+    return this.userModel.findByIdAndUpdate(id, user, { new: true }).exec();
   }
 }
