@@ -16,7 +16,11 @@ export class UsersService {
     return newUser.save();
   }
 
-  async updateUser(id: string, user: Partial<User>): Promise<User> {
+  async updateUser(id: string, user: Partial<User>): Promise<User | null> {
     return this.userModel.findByIdAndUpdate(id, user, { new: true }).exec();
+  }
+
+  async deleteUser(id: string): Promise<User | null> {
+    return this.userModel.findByIdAndDelete(id).exec();
   }
 }
